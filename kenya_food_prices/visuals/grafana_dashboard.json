@@ -1,0 +1,137 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_POSTGRESQL",
+      "label": "Kenya Food Prices PostgreSQL",
+      "description": "PostgreSQL data source for Kenya food prices",
+      "type": "datasource",
+      "pluginId": "postgres",
+      "pluginName": "PostgreSQL"
+    }
+  ],
+  "title": "Kenya Food Prices Dashboard",
+  "description": "Capstone project — Rene Bosire | Everything Data Bootcamp",
+  "tags": ["kenya", "food-prices", "capstone"],
+  "timezone": "Africa/Nairobi",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "1h",
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "Maize Price Trend (Monthly Average, KES)",
+      "datasource": "${DS_POSTGRESQL}",
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 9 },
+      "options": {
+        "tooltip": { "mode": "multi" },
+        "legend": { "displayMode": "table", "placement": "bottom" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyKES",
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_POSTGRESQL}",
+          "rawSql": "SELECT month_start AS time, county AS metric, maize_price_kes AS value FROM marts.mart_maize_price_trends WHERE $__timeFilter(month_start) ORDER BY month_start, county",
+          "format": "time_series",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "bargauge",
+      "title": "Average Price by Commodity (KES/kg)",
+      "datasource": "${DS_POSTGRESQL}",
+      "gridPos": { "x": 0, "y": 9, "w": 12, "h": 10 },
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": { "calcs": ["mean"] }
+      },
+      "fieldConfig": {
+        "defaults": { "unit": "currencyKES", "thresholds": {
+          "mode": "absolute",
+          "steps": [
+            { "color": "green", "value": null },
+            { "color": "yellow", "value": 100 },
+            { "color": "red", "value": 300 }
+          ]
+        }}
+      },
+      "targets": [
+        {
+          "datasource": "${DS_POSTGRESQL}",
+          "rawSql": "SELECT commodity AS metric, ROUND(AVG(avg_price_per_kg),2) AS value FROM marts.mart_monthly_avg_prices WHERE avg_price_per_kg IS NOT NULL GROUP BY commodity ORDER BY value DESC LIMIT 15",
+          "format": "table",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Total Price Records",
+      "datasource": "${DS_POSTGRESQL}",
+      "gridPos": { "x": 12, "y": 9, "w": 4, "h": 5 },
+      "targets": [
+        {
+          "datasource": "${DS_POSTGRESQL}",
+          "rawSql": "SELECT SUM(num_observations) AS value FROM marts.mart_monthly_avg_prices",
+          "format": "table",
+          "refId": "C"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Unique Markets",
+      "datasource": "${DS_POSTGRESQL}",
+      "gridPos": { "x": 16, "y": 9, "w": 4, "h": 5 },
+      "targets": [
+        {
+          "datasource": "${DS_POSTGRESQL}",
+          "rawSql": "SELECT COUNT(DISTINCT market_name) AS value FROM staging.dim_market",
+          "format": "table",
+          "refId": "D"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "Unique Commodities",
+      "datasource": "${DS_POSTGRESQL}",
+      "gridPos": { "x": 20, "y": 9, "w": 4, "h": 5 },
+      "targets": [
+        {
+          "datasource": "${DS_POSTGRESQL}",
+          "rawSql": "SELECT COUNT(DISTINCT commodity_name) AS value FROM staging.dim_commodity",
+          "format": "table",
+          "refId": "E"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "table",
+      "title": "Monthly Average Prices — Latest 3 Months",
+      "datasource": "${DS_POSTGRESQL}",
+      "gridPos": { "x": 0, "y": 19, "w": 24, "h": 9 },
+      "options": { "sortBy": [{ "displayName": "Month Start", "desc": true }] },
+      "targets": [
+        {
+          "datasource": "${DS_POSTGRESQL}",
+          "rawSql": "SELECT month_start, county, commodity, avg_price_kes, avg_price_per_kg, num_observations FROM marts.mart_monthly_avg_prices ORDER BY month_start DESC LIMIT 200",
+          "format": "table",
+          "refId": "F"
+        }
+      ]
+    }
+  ]
+}

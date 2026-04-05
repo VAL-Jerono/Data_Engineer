@@ -1,0 +1,10 @@
+.env
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+logs/
+dbt/target/
+dbt/dbt_packages/
+*.pyc

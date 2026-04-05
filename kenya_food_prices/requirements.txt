@@ -1,0 +1,46 @@
+# =============================================================
+# Kenya Food Prices — Python Dependencies
+# Author: Rene Bosire | Everything Data Bootcamp
+# Install: pip install -r requirements.txt
+# =============================================================
+
+# ── Core data stack ──────────────────────────────────────────
+pandas==2.2.2
+numpy==1.26.4
+requests==2.31.0
+python-dotenv==1.0.1
+
+# ── Database connectors ──────────────────────────────────────
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.30
+
+# ── Snowflake (optional) ─────────────────────────────────────
+# Install only if you want to run the optional Snowflake mirror:
+#   pip install snowflake-connector-python==3.10.1
+#   pip install "snowflake-sqlalchemy>=1.6,<1.7"
+
+# ── Apache Airflow (core + providers) ───────────────────────
+# Install separately to avoid dependency conflicts:
+#   pip install "apache-airflow==2.9.0" \
+#       apache-airflow-providers-postgres \
+#       apache-airflow-providers-snowflake
+# Listed here for reference only.
+# apache-airflow==2.9.0
+# apache-airflow-providers-postgres==5.10.2
+# apache-airflow-providers-snowflake==5.4.0
+
+# ── dbt ──────────────────────────────────────────────────────
+# Use a Python 3.11 environment for the smoothest install path.
+dbt-core==1.8.2
+dbt-postgres==1.8.2
+dbt-snowflake==1.8.2
+
+# ── Visualisation (optional local scripts) ───────────────────
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# ── Dev / testing ────────────────────────────────────────────
+pytest==8.2.2
+pytest-cov==5.0.0
+black==24.4.2
+ruff==0.4.7

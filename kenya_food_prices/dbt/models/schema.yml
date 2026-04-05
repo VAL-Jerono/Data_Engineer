@@ -1,0 +1,76 @@
+version: 2
+
+# ─────────────────────────────────────────────
+# Sources
+# ─────────────────────────────────────────────
+sources:
+  - name: staging
+    schema: staging
+    description: "Cleaned staging tables loaded by the ETL pipeline."
+    tables:
+      - name: stg_food_prices
+        description: "Cleaned WFP Kenya food price data."
+        columns:
+          - name: price_date
+            tests: [not_null]
+          - name: market
+            tests: [not_null]
+          - name: commodity
+            tests: [not_null]
+          - name: price_kes
+            tests: [not_null]
+
+# ─────────────────────────────────────────────
+# Staging models
+# ─────────────────────────────────────────────
+models:
+  - name: stg_food_prices
+    description: "Clean view of valid food price records."
+    columns:
+      - name: date
+        tests: [not_null]
+      - name: market
+        tests: [not_null]
+      - name: commodity
+        tests: [not_null]
+      - name: price_kes
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
+
+  - name: mart_monthly_avg_prices
+    description: >
+      Monthly average prices aggregated by county and commodity.
+      Primary table for dashboard visualisations.
+    columns:
+      - name: year
+        tests: [not_null]
+      - name: month
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      - name: county
+        tests: [not_null]
+      - name: commodity
+        tests: [not_null]
+      - name: avg_price_kes
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
+      - name: num_observations
+        tests: [not_null]
+
+  - name: mart_maize_price_trends
+    description: "Month-over-month maize price trends per county with YoY change."
+    columns:
+      - name: year
+        tests: [not_null]
+      - name: county
+        tests: [not_null]
+      - name: maize_price_kes
+        tests: [not_null]

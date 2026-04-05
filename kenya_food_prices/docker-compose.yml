@@ -1,0 +1,156 @@
+version: "3.9"
+
+# Kenya Food Prices — Local Dev Stack
+# Author: Rene Bosire | Everything Data Bootcamp
+#
+# Services:
+#   postgres   — Primary data store (raw + staging + warehouse schemas)
+#   airflow    — Workflow orchestration (Airflow 2.x)
+#   grafana    — Dashboards and visualisations
+#   metabase   — Business-friendly analytics (alternative to Grafana)
+#
+# Usage:
+#   docker compose up -d
+#   open http://localhost:3000   → Grafana (admin / admin)
+#   open http://localhost:3001   → Metabase
+#   open http://localhost:8080   → Airflow (airflow / airflow)
+
+x-airflow-env: &airflow-env
+  AIRFLOW__CORE__EXECUTOR: LocalExecutor
+  AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+  AIRFLOW__CORE__FERNET_KEY: ""
+  AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+  AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+  LOCAL_CSV_PATH: /opt/airflow/data/wfp_food_prices_ken.csv
+  # App DB env vars
+  PG_HOST:     postgres
+  PG_PORT:     "5432"
+  PG_DATABASE: kenya_food_prices
+  PG_USER:     kenya
+  PG_PASSWORD: kenya123
+  # Snowflake (fill in your credentials)
+  SF_ACCOUNT:   ""
+  SF_USER:      ""
+  SF_PASSWORD:  ""
+  SF_DATABASE:  "KENYA_FOOD_PRICES"
+  SF_WAREHOUSE: "COMPUTE_WH"
+  SF_ROLE:      "SYSADMIN"
+  SF_SCHEMA:    "PUBLIC"
+
+services:
+
+  # ── PostgreSQL ──────────────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: kfp_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB:       postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./sql/init_postgres.sh:/docker-entrypoint-initdb.d/init.sh
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Airflow ─────────────────────────────────────────────────
+  airflow-init:
+    image: apache/airflow:2.9.0-python3.11
+    container_name: kfp_airflow_init
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment: *airflow-env
+    entrypoint: >
+      bash -c "
+        airflow db migrate &&
+        airflow users create \
+          --username airflow \
+          --password airflow \
+          --firstname Rene \
+          --lastname Bosire \
+          --role Admin \
+          --email rene.bosire@example.com
+      "
+
+  airflow-webserver:
+    image: apache/airflow:2.9.0-python3.11
+    container_name: kfp_airflow_web
+    restart: unless-stopped
+    depends_on:
+      - airflow-init
+    environment: *airflow-env
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./python:/opt/airflow/python
+      - ./dbt:/opt/airflow/dbt
+      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./wfp_food_prices_ken.csv:/opt/airflow/data/wfp_food_prices_ken.csv
+      - airflow_logs:/opt/airflow/logs
+    ports:
+      - "8080:8080"
+    command: bash -c "pip install --no-cache-dir -r /opt/airflow/requirements.txt && airflow webserver"
+
+  airflow-scheduler:
+    image: apache/airflow:2.9.0-python3.11
+    container_name: kfp_airflow_scheduler
+    restart: unless-stopped
+    depends_on:
+      - airflow-init
+    environment: *airflow-env
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./python:/opt/airflow/python
+      - ./dbt:/opt/airflow/dbt
+      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./wfp_food_prices_ken.csv:/opt/airflow/data/wfp_food_prices_ken.csv
+      - airflow_logs:/opt/airflow/logs
+    command: bash -c "pip install --no-cache-dir -r /opt/airflow/requirements.txt && airflow scheduler"
+
+  # ── Grafana ─────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana-oss:10.4.0
+    container_name: kfp_grafana
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      GF_SECURITY_ADMIN_USER:     admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_INSTALL_PLUGINS:         grafana-piechart-panel
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./visuals/grafana_dashboard.json:/etc/grafana/provisioning/dashboards/kenya_food_prices.json
+    ports:
+      - "3000:3000"
+
+  # ── Metabase ────────────────────────────────────────────────
+  metabase:
+    image: metabase/metabase:latest
+    container_name: kfp_metabase
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      MB_DB_TYPE:   postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT:   5432
+      MB_DB_USER:   postgres
+      MB_DB_PASS:   postgres
+      MB_DB_HOST:   postgres
+    ports:
+      - "3001:3000"
+    volumes:
+      - metabase_data:/metabase.db
+
+volumes:
+  pg_data:
+  airflow_logs:
+  grafana_data:
+  metabase_data:
