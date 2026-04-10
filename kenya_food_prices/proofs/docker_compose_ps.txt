@@ -1,0 +1,6 @@
+NAME                    IMAGE                             COMMAND                  SERVICE             CREATED       STATUS                 PORTS
+kfp_airflow_scheduler   apache/airflow:2.9.0-python3.11   "/usr/bin/dumb-init …"   airflow-scheduler   2 hours ago   Up 2 hours             8080/tcp
+kfp_airflow_web         apache/airflow:2.9.0-python3.11   "/usr/bin/dumb-init …"   airflow-webserver   2 hours ago   Up 2 hours             0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+kfp_grafana             grafana/grafana-oss:10.4.0        "/run.sh"                grafana             2 hours ago   Up 2 hours             0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+kfp_metabase            metabase/metabase:latest          "/app/run_metabase.sh"   metabase            6 days ago    Up 2 hours             0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp
+kfp_postgres            postgres:15-alpine                "docker-entrypoint.s…"   postgres            2 hours ago   Up 2 hours (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp

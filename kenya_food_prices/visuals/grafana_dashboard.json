@@ -96,7 +96,7 @@
       "targets": [
         {
           "datasource": "${DS_POSTGRESQL}",
-          "rawSql": "SELECT COUNT(DISTINCT market_name) AS value FROM staging.dim_market",
+          "rawSql": "SELECT COUNT(DISTINCT market_name) AS value FROM warehouse.dim_market",
           "format": "table",
           "refId": "D"
         }
@@ -111,7 +111,7 @@
       "targets": [
         {
           "datasource": "${DS_POSTGRESQL}",
-          "rawSql": "SELECT COUNT(DISTINCT commodity_name) AS value FROM staging.dim_commodity",
+          "rawSql": "SELECT COUNT(DISTINCT commodity_name) AS value FROM warehouse.dim_commodity",
           "format": "table",
           "refId": "E"
         }

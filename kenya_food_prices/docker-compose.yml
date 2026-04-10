@@ -90,7 +90,7 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./python:/opt/airflow/python
       - ./dbt:/opt/airflow/dbt
-      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./airflow/requirements.txt:/opt/airflow/requirements.txt
       - ./wfp_food_prices_ken.csv:/opt/airflow/data/wfp_food_prices_ken.csv
       - airflow_logs:/opt/airflow/logs
     ports:
@@ -108,7 +108,7 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./python:/opt/airflow/python
       - ./dbt:/opt/airflow/dbt
-      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./airflow/requirements.txt:/opt/airflow/requirements.txt
       - ./wfp_food_prices_ken.csv:/opt/airflow/data/wfp_food_prices_ken.csv
       - airflow_logs:/opt/airflow/logs
     command: bash -c "pip install --no-cache-dir -r /opt/airflow/requirements.txt && airflow scheduler"

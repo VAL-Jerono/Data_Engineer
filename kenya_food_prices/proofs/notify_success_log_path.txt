@@ -1,0 +1,1 @@
+/opt/airflow/logs/dag_id=kenya_food_prices_etl/run_id=manual__2026-04-10T18:34:59.941125+00:00/task_id=notify_success/attempt=1.log

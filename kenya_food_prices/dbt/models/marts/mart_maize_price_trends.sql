@@ -1,7 +1,7 @@
 -- dbt model: mart_maize_price_trends.sql
 -- Layer: marts
 -- Author: Rene Bosire | Everything Data Bootcamp
--- Description: Yearly maize price trend with YoY change.
+-- Description: Monthly maize price trend with MoM change.
 --              Powers the main trend line dashboard.
 
 {{
@@ -17,6 +17,8 @@ WITH maize_monthly AS (
         month,
         month_start,
         county,
+        commodity,
+        unit,
         avg_price_kes,
         num_observations
     FROM {{ ref('mart_monthly_avg_prices') }}
@@ -38,6 +40,8 @@ SELECT
     month,
     month_start,
     county,
+    commodity,
+    unit,
     ROUND(avg_price_kes,  2)            AS maize_price_kes,
     ROUND(prev_month_price, 2)          AS prev_month_price_kes,
     ROUND(

@@ -1,0 +1,52 @@
+[0m19:06:18  Running with dbt=1.8.2
+[0m19:06:19  Registered adapter: postgres=1.8.2
+[0m19:06:22  Found 3 models, 20 data tests, 1 source, 545 macros
+[0m19:06:22  
+[0m19:06:22  Concurrency: 4 threads (target='dev')
+[0m19:06:22  
+[0m19:06:22  1 of 20 START test accepted_values_mart_monthly_avg_prices_month__1__2__3__4__5__6__7__8__9__10__11__12  [RUN]
+[0m19:06:22  2 of 20 START test dbt_utils_accepted_range_mart_monthly_avg_prices_avg_price_kes__False__0  [RUN]
+[0m19:06:22  3 of 20 START test dbt_utils_accepted_range_stg_food_prices_price_kes__False__0  [RUN]
+[0m19:06:22  4 of 20 START test not_null_mart_maize_price_trends_county ..................... [RUN]
+[0m19:06:22  4 of 20 PASS not_null_mart_maize_price_trends_county ........................... [[32mPASS[0m in 0.39s]
+[0m19:06:22  5 of 20 START test not_null_mart_maize_price_trends_maize_price_kes ............ [RUN]
+[0m19:06:22  2 of 20 PASS dbt_utils_accepted_range_mart_monthly_avg_prices_avg_price_kes__False__0  [[32mPASS[0m in 0.41s]
+[0m19:06:23  6 of 20 START test not_null_mart_maize_price_trends_year ....................... [RUN]
+[0m19:06:23  1 of 20 PASS accepted_values_mart_monthly_avg_prices_month__1__2__3__4__5__6__7__8__9__10__11__12  [[32mPASS[0m in 0.45s]
+[0m19:06:23  3 of 20 PASS dbt_utils_accepted_range_stg_food_prices_price_kes__False__0 ...... [[32mPASS[0m in 0.58s]
+[0m19:06:23  7 of 20 START test not_null_mart_monthly_avg_prices_avg_price_kes .............. [RUN]
+[0m19:06:23  8 of 20 START test not_null_mart_monthly_avg_prices_commodity .................. [RUN]
+[0m19:06:23  5 of 20 PASS not_null_mart_maize_price_trends_maize_price_kes .................. [[32mPASS[0m in 0.32s]
+[0m19:06:23  9 of 20 START test not_null_mart_monthly_avg_prices_county ..................... [RUN]
+[0m19:06:23  6 of 20 PASS not_null_mart_maize_price_trends_year ............................. [[32mPASS[0m in 0.34s]
+[0m19:06:23  10 of 20 START test not_null_mart_monthly_avg_prices_month ..................... [RUN]
+[0m19:06:23  7 of 20 PASS not_null_mart_monthly_avg_prices_avg_price_kes .................... [[32mPASS[0m in 0.21s]
+[0m19:06:23  11 of 20 START test not_null_mart_monthly_avg_prices_num_observations .......... [RUN]
+[0m19:06:23  8 of 20 PASS not_null_mart_monthly_avg_prices_commodity ........................ [[32mPASS[0m in 0.36s]
+[0m19:06:23  12 of 20 START test not_null_mart_monthly_avg_prices_year ...................... [RUN]
+[0m19:06:23  9 of 20 PASS not_null_mart_monthly_avg_prices_county ........................... [[32mPASS[0m in 0.28s]
+[0m19:06:23  13 of 20 START test not_null_stg_food_prices_commodity ......................... [RUN]
+[0m19:06:23  10 of 20 PASS not_null_mart_monthly_avg_prices_month ........................... [[32mPASS[0m in 0.34s]
+[0m19:06:23  11 of 20 PASS not_null_mart_monthly_avg_prices_num_observations ................ [[32mPASS[0m in 0.32s]
+[0m19:06:23  14 of 20 START test not_null_stg_food_prices_date .............................. [RUN]
+[0m19:06:23  15 of 20 START test not_null_stg_food_prices_market ............................ [RUN]
+[0m19:06:23  12 of 20 PASS not_null_mart_monthly_avg_prices_year ............................ [[32mPASS[0m in 0.31s]
+[0m19:06:23  16 of 20 START test not_null_stg_food_prices_price_kes ......................... [RUN]
+[0m19:06:23  13 of 20 PASS not_null_stg_food_prices_commodity ............................... [[32mPASS[0m in 0.34s]
+[0m19:06:23  17 of 20 START test source_not_null_staging_stg_food_prices_commodity .......... [RUN]
+[0m19:06:24  14 of 20 PASS not_null_stg_food_prices_date .................................... [[32mPASS[0m in 0.30s]
+[0m19:06:24  18 of 20 START test source_not_null_staging_stg_food_prices_market ............. [RUN]
+[0m19:06:24  15 of 20 PASS not_null_stg_food_prices_market .................................. [[32mPASS[0m in 0.37s]
+[0m19:06:24  19 of 20 START test source_not_null_staging_stg_food_prices_price_date ......... [RUN]
+[0m19:06:24  16 of 20 PASS not_null_stg_food_prices_price_kes ............................... [[32mPASS[0m in 0.28s]
+[0m19:06:24  20 of 20 START test source_not_null_staging_stg_food_prices_price_kes .......... [RUN]
+[0m19:06:24  18 of 20 PASS source_not_null_staging_stg_food_prices_market ................... [[32mPASS[0m in 0.23s]
+[0m19:06:24  17 of 20 PASS source_not_null_staging_stg_food_prices_commodity ................ [[32mPASS[0m in 0.35s]
+[0m19:06:24  19 of 20 PASS source_not_null_staging_stg_food_prices_price_date ............... [[32mPASS[0m in 0.20s]
+[0m19:06:24  20 of 20 PASS source_not_null_staging_stg_food_prices_price_kes ................ [[32mPASS[0m in 0.20s]
+[0m19:06:24  
+[0m19:06:24  Finished running 20 data tests in 0 hours 0 minutes and 2.49 seconds (2.49s).
+[0m19:06:24  
+[0m19:06:24  [32mCompleted successfully[0m
+[0m19:06:24  
+[0m19:06:24  Done. PASS=20 WARN=0 ERROR=0 SKIP=0 TOTAL=20

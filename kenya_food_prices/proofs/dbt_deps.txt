@@ -1,0 +1,7 @@
+[0m19:05:57  Running with dbt=1.8.2
+[0m19:05:58  Installing dbt-labs/dbt_utils
+[0m19:05:59  Installed from version 1.3.0
+[0m19:05:59  Updated version available: 1.3.3
+[0m19:05:59  
+[0m19:05:59  Updates available for packages: ['dbt-labs/dbt_utils']                 
+Update your versions in packages.yml, then run dbt deps

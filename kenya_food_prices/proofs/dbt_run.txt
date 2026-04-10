@@ -1,0 +1,23 @@
+[0m19:06:05  Running with dbt=1.8.2
+[0m19:06:06  Registered adapter: postgres=1.8.2
+[0m19:06:06  Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m19:06:08  [[33mWARNING[0m]: Deprecated functionality
+The `tests` config has been renamed to `data_tests`. Please see
+https://docs.getdbt.com/docs/build/data-tests#new-data_tests-syntax for more
+information.
+[0m19:06:09  Found 3 models, 20 data tests, 1 source, 545 macros
+[0m19:06:09  
+[0m19:06:10  Concurrency: 4 threads (target='dev')
+[0m19:06:10  
+[0m19:06:10  1 of 3 START sql view model analytics.stg_food_prices .......................... [RUN]
+[0m19:06:10  1 of 3 OK created sql view model analytics.stg_food_prices ..................... [[32mCREATE VIEW[0m in 0.34s]
+[0m19:06:10  2 of 3 START sql table model marts.mart_monthly_avg_prices ..................... [RUN]
+[0m19:06:11  2 of 3 OK created sql table model marts.mart_monthly_avg_prices ................ [[32mSELECT 8363[0m in 0.82s]
+[0m19:06:11  3 of 3 START sql table model marts.mart_maize_price_trends ..................... [RUN]
+[0m19:06:11  3 of 3 OK created sql table model marts.mart_maize_price_trends ................ [[32mSELECT 2032[0m in 0.18s]
+[0m19:06:11  
+[0m19:06:11  Finished running 1 view model, 2 table models in 0 hours 0 minutes and 2.18 seconds (2.18s).
+[0m19:06:11  
+[0m19:06:11  [32mCompleted successfully[0m
+[0m19:06:11  
+[0m19:06:11  Done. PASS=3 WARN=0 ERROR=0 SKIP=0 TOTAL=3
