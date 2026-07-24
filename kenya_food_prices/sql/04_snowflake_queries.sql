@@ -1,6 +1,5 @@
 -- =============================================================
--- Kenya Food Prices Data Engineering Capstone
--- Author: Rene Bosire | Everything Data Bootcamp
+-- Kenya Food Prices Data Engineering 
 -- Script: snowflake_queries.sql
 -- Purpose: Demonstrates Snowflake-specific SQL features
 --          and differences vs PostgreSQL
