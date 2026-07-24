@@ -1,6 +1,5 @@
 -- dbt model: stg_food_prices.sql
 -- Layer: staging
--- Author: Rene Bosire | Everything Data Bootcamp
 -- Description: Selects clean, valid rows from staging table
 --              and prepares them for the mart layer.
 
