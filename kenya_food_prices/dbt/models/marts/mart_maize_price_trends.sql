@@ -1,6 +1,5 @@
 -- dbt model: mart_maize_price_trends.sql
 -- Layer: marts
--- Author: Rene Bosire | Everything Data Bootcamp
 -- Description: Monthly maize price trend with MoM change.
 --              Powers the main trend line dashboard.
 
