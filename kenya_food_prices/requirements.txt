@@ -1,6 +1,6 @@
 # =============================================================
-# Kenya Food Prices — Python Dependencies
-# Author: Rene Bosire | Everything Data Bootcamp
+# Kenya Food Prices — Python Dependencies.
+
 # Install: pip install -r requirements.txt
 # =============================================================
 
