@@ -1,6 +1,5 @@
 """
-Kenya Food Prices Data Engineering Capstone
-Author: Rene Bosire | Everything Data Bootcamp
+Kenya Food Prices Data Engineering 
 Module: clean.py — Data Transformation & Cleaning Layer
 
 Responsibilities:
