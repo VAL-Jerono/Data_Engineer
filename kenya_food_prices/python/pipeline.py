@@ -1,6 +1,5 @@
 """
-Kenya Food Prices Data Engineering Capstone
-Author: Rene Bosire | Everything Data Bootcamp
+Kenya Food Prices Data Engineering 
 Module: pipeline.py — Full ETL Orchestrator
 
 Run this directly for a one-shot pipeline execution:
