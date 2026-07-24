@@ -1,8 +1,6 @@
 version: "3.9"
 
-# Kenya Food Prices — Local Dev Stack
-# Author: Rene Bosire | Everything Data Bootcamp
-#
+# Kenya Food Prices — Local Dev Stack.
 # Services:
 #   postgres   — Primary data store (raw + staging + warehouse schemas)
 #   airflow    — Workflow orchestration (Airflow 2.x)
