@@ -1,8 +1,8 @@
 # Kenya Food Prices Data Engineering Capstone
 
 **Author:** Valerie Jerono 
-**Bootcamp:** Everything Data, Data Engineering Track  
-**Submission target:** End of March 2026
+ 
+
 
 ## Project Summary
 
