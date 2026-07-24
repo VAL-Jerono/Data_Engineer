@@ -1,7 +1,6 @@
 #!/bin/bash
 # =============================================================
 # Kenya Food Prices — PostgreSQL Docker Init Script
-# Author: Rene Bosire | Everything Data Bootcamp
 # Runs automatically when the postgres container starts fresh.
 # Creates the app database, user, and base schemas.
 # =============================================================
