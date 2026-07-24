@@ -1,6 +1,6 @@
-# Kenya Food Prices Data Engineering Capstone
+# Kenya Food Prices Data Engineering 
 
-**Author:** Valerie Jerono 
+**Author:** Valerie Jerono.
  
 
 
