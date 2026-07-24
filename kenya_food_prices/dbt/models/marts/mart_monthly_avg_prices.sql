@@ -1,6 +1,5 @@
 -- dbt model: mart_monthly_avg_prices.sql
 -- Layer: marts
--- Author: Rene Bosire | Everything Data Bootcamp
 -- Description: Monthly average prices per county and commodity.
 --              Used directly by Grafana/Metabase dashboards.
 
