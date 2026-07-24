@@ -1,6 +1,5 @@
 -- =============================================================
--- Kenya Food Prices Data Engineering Capstone
--- Author: Rene Bosire | Everything Data Bootcamp
+-- Kenya Food Prices Data Engineering 
 -- Script: 01_setup.sql — Database & Raw Staging Table
 -- =============================================================
 
